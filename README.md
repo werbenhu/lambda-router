@@ -24,7 +24,9 @@ func init() {
 }
 
 func testWithName(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	name := request.QueryStringParameters[":name"]
 	resp := map[string]interface{}{
+		"name":   name,
 		"path":   request.Path,
 		"method": request.HTTPMethod,
 		"params": request.QueryStringParameters,
