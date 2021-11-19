@@ -1,5 +1,5 @@
 // Package mux implements a high performance and powerful trie based url path router for Go.
-package mux
+package router
 
 import (
 	"fmt"
