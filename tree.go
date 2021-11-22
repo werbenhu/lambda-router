@@ -24,7 +24,7 @@ var (
 	// optional param
 	optionalParamRegexp = regexp.MustCompile(`^\?:\w+$`)
 
-	defaultOptions = Options{
+	defaultOptions = TOptions{
 		CaseSensitive:  true,
 		PathClean:      true,
 		StrictSlash:    true,
@@ -33,7 +33,7 @@ var (
 )
 
 // Options describes options for Trie.
-type Options struct {
+type TOptions struct {
 	// CaseSensitive when matching URL path.
 	CaseSensitive bool
 
@@ -68,7 +68,7 @@ type Options struct {
 //  // disable CaseSensitive, PathClean and StrictSlash
 //  trie := New(Options{})
 //
-func NewTrie(args ...Options) *Trie {
+func NewTrie(args ...TOptions) *Trie {
 	opts := defaultOptions
 	if len(args) > 0 {
 		opts = args[0]
