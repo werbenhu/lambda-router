@@ -8,47 +8,43 @@ package main
 
 import (
 	"context"
-	"encoding/json"
+	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+
 	"github.com/werbenhu/router"
 )
 
-var r *router.Router
-
 func init() {
-	r = router.New()
-	r.Get("/test", test)
-	r.Get("/test/:name", testWithName)
-}
+	router.Get("/test", test)
+	router.Get("/test/:name", testWithName)
 
-func testWithName(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	name := request.QueryStringParameters[":name"]
-	resp := map[string]interface{}{
-		"name":   name,
-		"path":   request.Path,
-		"method": request.HTTPMethod,
-		"params": request.QueryStringParameters,
-	}
-
-	body, _ := json.Marshal(resp)
-	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
+	group := router.NewGroup("aaa")
+	group.Get("/bbb", groupWithName)
 }
 
 func test(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	resp := map[string]interface{}{
-		"path":   request.Path,
-		"method": request.HTTPMethod,
-		"params": request.QueryStringParameters,
-	}
+	fmt.Printf("Headers:%+v\n", request.Headers)
+	fmt.Printf("params:%+v\n", request.QueryStringParameters)
+	return events.APIGatewayProxyResponse{Body: "GET WERBEN IN ROUTER", StatusCode: 200}, nil
+}
 
-	body, _ := json.Marshal(resp)
-	return events.APIGatewayProxyResponse{Body: string(body), StatusCode: 200}, nil
+func testWithName(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	fmt.Printf("Headers:%+v\n", request.Headers)
+	fmt.Printf("params:%+v\n", request.QueryStringParameters)
+	return events.APIGatewayProxyResponse{Body: "GET WERBEN IN ROUTER", StatusCode: 200}, nil
+}
+
+func groupWithName(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	fmt.Printf("Headers:%+v\n", request.Headers)
+	fmt.Printf("params:%+v\n", request.QueryStringParameters)
+	return events.APIGatewayProxyResponse{Body: "GET WERBEN IN ROUTER", StatusCode: 200}, nil
 }
 
 func main() {
-	lambda.Start(r.Handler)
+	lambda.Start(router.Handler)
 }
+
 
 ```
