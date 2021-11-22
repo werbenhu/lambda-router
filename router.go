@@ -19,7 +19,7 @@ type Router struct {
 }
 
 // New returns a Mux instance.
-func New(opts ...Options) *Router {
+func New(opts ...TOptions) *Router {
 	return &Router{trie: NewTrie(opts...)}
 }
 
