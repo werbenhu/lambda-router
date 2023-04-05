@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
-	"router "github.com/werbenhu/lambda-router""
+	router "github.com/werbenhu/lambda-router"
 )
 
 func init() {
