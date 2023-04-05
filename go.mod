@@ -1,4 +1,4 @@
-module github.com/werbenhu/router
+module github.com/werbenhu/lambda-router
 
 go 1.16
 

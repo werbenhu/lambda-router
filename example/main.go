@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/werbenhu/router"
+	router "github.com/werbenhu/lambda-router"
 )
 
 func main() {
